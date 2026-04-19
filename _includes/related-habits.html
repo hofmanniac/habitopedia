@@ -1,0 +1,50 @@
+{% if page.prerequisites and page.prerequisites.size > 0 %}
+  <div class="sidebar-panel">
+    <h3>🔑 Prerequisites</h3>
+    <p class="section-note">Build these habits first:</p>
+    <div class="habit-cards">
+    {% for slug in page.prerequisites %}
+      {% assign habit = site.habits | where: "slug", slug | first %}
+      {% if habit %}
+        <a href="{{ habit.url | relative_url }}" class="habit-mini-card">{{ habit.title }}</a>
+      {% else %}
+        <div class="habit-mini-card coming-soon">{{ slug | replace: "-", " " | capitalize }}</div>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+{% if page.related_habits and page.related_habits.size > 0 %}
+  <div class="sidebar-panel">
+    <h3>🔄 Related Habits</h3>
+    <p class="section-note">You might also be interested in:</p>
+    <div class="habit-cards">
+    {% for slug in page.related_habits %}
+      {% assign habit = site.habits | where: "slug", slug | first %}
+      {% if habit %}
+        <a href="{{ habit.url | relative_url }}" class="habit-mini-card">{{ habit.title }}</a>
+      {% else %}
+        <div class="habit-mini-card coming-soon">{{ slug | replace: "-", " " | capitalize }}</div>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+{% if page.habit_stacks and page.habit_stacks.size > 0 %}
+  <div class="sidebar-panel">
+    <h3>📦 Habit Stacks</h3>
+    <p class="section-note">Combine this habit with:</p>
+    <div class="habit-cards">
+    {% for slug in page.habit_stacks %}
+      {% assign habit = site.habits | where: "slug", slug | first %}
+      {% if habit %}
+        <a href="{{ habit.url | relative_url }}" class="habit-mini-card">{{ habit.title }}</a>
+      {% else %}
+        <div class="habit-mini-card coming-soon">{{ slug | replace: "-", " " | capitalize }}</div>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+{% endif %}

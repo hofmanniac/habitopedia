@@ -1,0 +1,42 @@
+# Time Investment Levels
+# How much time a habit typically requires
+
+micro:
+  name: "Micro (< 5 min)"
+  short_name: "< 5 min"
+  icon: "⚡"
+  description: "Quick habits that take less than 5 minutes"
+  color: "#10b981"
+  minutes: 5
+
+short:
+  name: "Short (5-15 min)"
+  short_name: "5-15 min"
+  icon: "⏱️"
+  description: "Brief habits requiring 5 to 15 minutes"
+  color: "#3b82f6"
+  minutes: 15
+
+medium:
+  name: "Medium (15-30 min)"
+  short_name: "15-30 min"
+  icon: "⏲️"
+  description: "Moderate time commitment of 15 to 30 minutes"
+  color: "#f59e0b"
+  minutes: 30
+
+long:
+  name: "Long (30-60 min)"
+  short_name: "30-60 min"
+  icon: "⏰"
+  description: "Substantial practice requiring 30 minutes to 1 hour"
+  color: "#ef4444"
+  minutes: 60
+
+extended:
+  name: "Extended (1+ hr)"
+  short_name: "1+ hr"
+  icon: "📅"
+  description: "Extended commitment of over an hour"
+  color: "#8b5cf6"
+  minutes: 60

@@ -1,0 +1,15 @@
+<div class="metadata-badges">
+  {% if page.ring %}
+    {% assign ring = site.data.rings | where: "level", page.ring | first %}
+    <span class="badge ring-badge" style="background-color: {{ ring.color }}; color: {{ ring.badge_color }}" title="{{ ring.description }}">
+      {{ ring.icon }} {{ ring.short_name }}
+    </span>
+  {% endif %}
+  
+  {% if page.time_investment %}
+    {% assign time = site.data.time_investment[page.time_investment] %}
+    <span class="badge time-badge" style="background-color: {{ time.color }}" title="{{ time.description }}">
+      {{ time.icon }} {{ time.short_name }}
+    </span>
+  {% endif %}
+</div>

@@ -1,0 +1,21 @@
+---
+layout: null
+permalink: /search.json
+---
+{% assign published_habits = site.habits | where_exp: "h", "h.published == true and h.title.size > 0" %}
+[
+{% for habit in published_habits %}
+  {
+    "title": {{ habit.title | jsonify }},
+    "slug": {{ habit.slug | jsonify }},
+    "code": {{ habit.code | jsonify }},
+    "url": {{ habit.url | jsonify }},
+    "description": {{ habit.description | jsonify }},
+    "primary_category": {{ habit.primary_category | jsonify }},
+    "tags": {{ habit.tags | jsonify }},
+    "ring": {{ habit.ring | jsonify }},
+    "time_investment": {{ habit.time_investment | jsonify }},
+    "content": {{ habit.content | strip_html | truncate: 300 | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]

@@ -1,0 +1,31 @@
+- level: 0
+  name: "Foundation"
+  short_name: "Ring 0"
+  icon: "⬤"
+  description: "Universal keystone habits - non-negotiable foundations for health and wellbeing"
+  color: "#1a1a1a"
+  badge_color: "#ffffff"
+  
+- level: 1
+  name: "Core"
+  short_name: "Ring 1"
+  icon: "◉"
+  description: "Widely beneficial habits with strong evidence and broad applicability"
+  color: "#2d5aa6"
+  badge_color: "#ffffff"
+  
+- level: 2
+  name: "Advanced"
+  short_name: "Ring 2"
+  icon: "◎"
+  description: "Valuable habits for specific goals or contexts"
+  color: "#5a8ac6"
+  badge_color: "#ffffff"
+  
+- level: 3
+  name: "Specialized"
+  short_name: "Ring 3"
+  icon: "○"
+  description: "Experimental or highly contextual habits for particular situations"
+  color: "#8ab4e6"
+  badge_color: "#1a1a1a"

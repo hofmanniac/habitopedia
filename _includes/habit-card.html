@@ -1,0 +1,39 @@
+<div class="habit-card">
+  <a href="{{ include.habit.url | relative_url }}" class="habit-card-link">
+    <div class="habit-card-header">
+      {% if include.habit.code %}
+        <span class="habit-code-small">{{ include.habit.code }}</span>
+      {% endif %}
+      {% if include.habit.primary_category %}
+        {% assign cat = site.data.categories[include.habit.primary_category] %}
+        <span class="category-icon" title="{{ cat.name }}">{{ cat.icon }}</span>
+      {% endif %}
+    </div>
+    
+    <h3 class="habit-card-title">{{ include.habit.title }}</h3>
+    
+    {% if include.habit.description %}
+      <p class="habit-card-description">{{ include.habit.description }}</p>
+    {% endif %}
+    
+    <div class="habit-card-meta">
+      {% if include.habit.ring %}
+        {% assign ring = site.data.rings | where: "level", include.habit.ring | first %}
+        <span class="meta-badge ring-badge-small" style="background-color: {{ ring.color }}; color: {{ ring.badge_color }};" title="{{ ring.name }}">
+          {{ ring.icon }} {{ ring.short_name }}
+        </span>
+      {% endif %}
+      
+      {% if include.habit.time_investment %}
+        {% assign time = site.data.time_investment[include.habit.time_investment] %}
+        <span class="meta-badge" title="{{ time.name }}">{{ time.icon }}</span>
+      {% endif %}
+      
+      {% if include.habit.references %}
+        <span class="meta-badge" title="{{ include.habit.references.size }} sources">
+          📚 {{ include.habit.references.size }}
+        </span>
+      {% endif %}
+    </div>
+  </a>
+</div>

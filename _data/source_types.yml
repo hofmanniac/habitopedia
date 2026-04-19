@@ -1,0 +1,50 @@
+# Source Types
+# Different media types where habit advice can come from
+
+book:
+  name: "Book"
+  icon: "📖"
+  description: "Published books (print or digital)"
+  fields: ["title", "author", "isbn", "year", "publisher"]
+
+podcast:
+  name: "Podcast"
+  icon: "🎙️"
+  description: "Podcast episodes"
+  fields: ["show", "episode", "host", "guest", "timestamp"]
+
+video:
+  name: "Video"
+  icon: "🎥"
+  description: "YouTube videos, courses, or other video content"
+  fields: ["title", "creator", "platform", "timestamp"]
+
+article:
+  name: "Article"
+  icon: "📄"
+  description: "Blog posts, magazine articles, web content"
+  fields: ["title", "author", "publication", "date"]
+
+paper:
+  name: "Research Paper"
+  icon: "🔬"
+  description: "Academic research and scientific papers"
+  fields: ["title", "authors", "journal", "year", "doi"]
+
+course:
+  name: "Course"
+  icon: "🎓"
+  description: "Online courses or educational programs"
+  fields: ["title", "instructor", "platform", "lesson"]
+
+social:
+  name: "Social Media"
+  icon: "📱"
+  description: "Twitter threads, LinkedIn posts, etc."
+  fields: ["author", "platform", "date"]
+
+interview:
+  name: "Interview"
+  icon: "🗣️"
+  description: "Interviews or Q&A sessions"
+  fields: ["interviewee", "interviewer", "source", "date"]

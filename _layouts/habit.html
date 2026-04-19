@@ -1,0 +1,106 @@
+---
+layout: default
+---
+
+<article class="habit-detail">
+  <header class="habit-header">
+    <div class="habit-meta">
+      {% if page.code %}
+        <span class="habit-code">{{ page.code }}</span>
+      {% endif %}
+      {% if page.primary_category %}
+        {% assign cat = site.data.categories[page.primary_category] %}
+        <span class="category-badge" style="background-color: {{ cat.color }}">
+          {{ cat.icon }} {{ cat.name }}
+        </span>
+      {% endif %}
+    </div>
+    
+    <h1 class="habit-title">{{ page.title }}</h1>
+    
+    {% if page.description %}
+      <p class="habit-description">{{ page.description }}</p>
+    {% endif %}
+    
+    {% include metadata-badges.html %}
+  </header>
+
+  <div class="habit-layout">
+    <div class="habit-main">
+      {% assign stripped_content = content | strip %}
+      {% if stripped_content != "" %}
+      <section id="overview" class="habit-section habit-overview">
+        <div class="habit-content">
+          {{ content }}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if page.how_to_start %}
+      <section id="how-to-start" class="habit-section">
+        <h2>🚀 How to Start</h2>
+        <div class="section-content">
+          {{ page.how_to_start | markdownify }}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if page.tips and page.tips.size > 0 %}
+      <section id="tips" class="habit-section">
+        <h2>💡 Implementation Tips</h2>
+        <ul class="tips-list">
+          {% for tip in page.tips %}
+            <li>{{ tip }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      {% if page.common_pitfalls and page.common_pitfalls.size > 0 %}
+      <section id="pitfalls" class="habit-section">
+        <h2>⚠️ Common Pitfalls</h2>
+        <ul class="pitfalls-list">
+          {% for pitfall in page.common_pitfalls %}
+            <li>{{ pitfall }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      {% if page.success_metrics and page.success_metrics.size > 0 %}
+      <section id="metrics" class="habit-section">
+        <h2>📊 Success Metrics</h2>
+        <ul class="metrics-list">
+          {% for metric in page.success_metrics %}
+            <li>{{ metric }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      {% if page.references and page.references.size > 0 %}
+      <section id="references" class="habit-section">
+        <h2>📚 References & Sources</h2>
+        {% include reference-list.html references=page.references %}
+      </section>
+      {% endif %}
+    </div>
+
+    {% if page.related_habits or page.prerequisites or page.habit_stacks %}
+    <aside class="habit-sidebar">
+      {% include related-habits.html %}
+    </aside>
+    {% endif %}
+  </div>
+
+  {% if page.tags and page.tags.size > 0 %}
+  <footer class="habit-footer">
+    <div class="tags">
+      <strong>Tags:</strong>
+      {% for tag in page.tags %}
+        <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+  </footer>
+  {% endif %}
+</article>

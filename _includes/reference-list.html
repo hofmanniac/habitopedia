@@ -1,0 +1,58 @@
+<div class="references-list">
+  {% for ref in include.references %}
+    <div class="reference-item">
+      {% assign source_type = site.data.source_types[ref.type] %}
+      
+      <span class="source-icon">{{ source_type.icon }}</span>
+      
+      <div class="reference-content">
+        <strong>
+          {% if ref.url %}
+            <a href="{{ ref.url }}" target="_blank" rel="noopener">{{ ref.title }}</a>
+          {% else %}
+            {{ ref.title }}
+          {% endif %}
+        </strong>
+        
+        {% if ref.type == 'book' %}
+          {% if ref.author %}<span class="ref-detail">by {{ ref.author }}</span>{% endif %}
+          {% if ref.year %}<span class="ref-detail">({{ ref.year }})</span>{% endif %}
+          {% if ref.isbn %}<span class="ref-detail">ISBN: {{ ref.isbn }}</span>{% endif %}
+        
+        {% elsif ref.type == 'podcast' %}
+          {% if ref.show %}<span class="ref-detail">{{ ref.show }}</span>{% endif %}
+          {% if ref.episode %}<span class="ref-detail">Episode: {{ ref.episode }}</span>{% endif %}
+          {% if ref.host %}<span class="ref-detail">Host: {{ ref.host }}</span>{% endif %}
+          {% if ref.guest %}<span class="ref-detail">Guest: {{ ref.guest }}</span>{% endif %}
+          {% if ref.timestamp %}<span class="ref-detail">@ {{ ref.timestamp }}</span>{% endif %}
+        
+        {% elsif ref.type == 'video' %}
+          {% if ref.creator %}<span class="ref-detail">by {{ ref.creator }}</span>{% endif %}
+          {% if ref.platform %}<span class="ref-detail">on {{ ref.platform }}</span>{% endif %}
+          {% if ref.timestamp %}<span class="ref-detail">@ {{ ref.timestamp }}</span>{% endif %}
+        
+        {% elsif ref.type == 'article' %}
+          {% if ref.author %}<span class="ref-detail">by {{ ref.author }}</span>{% endif %}
+          {% if ref.publication %}<span class="ref-detail">in {{ ref.publication }}</span>{% endif %}
+          {% if ref.date %}<span class="ref-detail">({{ ref.date }})</span>{% endif %}
+        
+        {% elsif ref.type == 'paper' %}
+          {% if ref.authors %}<span class="ref-detail">{{ ref.authors | join: ", " }}</span>{% endif %}
+          {% if ref.journal %}<span class="ref-detail">{{ ref.journal }}</span>{% endif %}
+          {% if ref.year %}<span class="ref-detail">({{ ref.year }})</span>{% endif %}
+          {% if ref.doi %}<span class="ref-detail"><a href="https://doi.org/{{ ref.doi }}" target="_blank">DOI</a></span>{% endif %}
+        
+        {% elsif ref.type == 'course' %}
+          {% if ref.instructor %}<span class="ref-detail">by {{ ref.instructor }}</span>{% endif %}
+          {% if ref.platform %}<span class="ref-detail">on {{ ref.platform }}</span>{% endif %}
+          {% if ref.lesson %}<span class="ref-detail">Lesson: {{ ref.lesson }}</span>{% endif %}
+        
+        {% endif %}
+        
+        {% if ref.notes %}
+          <p class="ref-notes">{{ ref.notes }}</p>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>

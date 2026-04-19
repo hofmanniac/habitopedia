@@ -1,0 +1,72 @@
+# Habit Categories
+# Each category includes: name, icon, description, color (for badges/styling)
+
+productivity:
+  name: "Productivity"
+  code: "PROD"
+  icon: "⚡"
+  description: "Habits that enhance efficiency, focus, and output"
+  color: "#3b82f6"
+
+health:
+  name: "Health & Wellness"
+  code: "HEALTH"
+  icon: "💪"
+  description: "Physical and mental health practices"
+  color: "#10b981"
+
+relationships:
+  name: "Relationships"
+  code: "REL"
+  icon: "❤️"
+  description: "Building and maintaining meaningful connections"
+  color: "#ec4899"
+
+finance:
+  name: "Finance"
+  code: "FIN"
+  icon: "💰"
+  description: "Money management and financial well-being"
+  color: "#f59e0b"
+
+mindset:
+  name: "Mindset"
+  code: "MIND"
+  icon: "🧠"
+  description: "Mental frameworks and cognitive habits"
+  color: "#8b5cf6"
+
+learning:
+  name: "Learning"
+  code: "LEARN"
+  icon: "📚"
+  description: "Knowledge acquisition and skill development"
+  color: "#06b6d4"
+
+creativity:
+  name: "Creativity"
+  code: "CREATE"
+  icon: "🎨"
+  description: "Artistic expression and innovative thinking"
+  color: "#f43f5e"
+
+communication:
+  name: "Communication"
+  code: "COMM"
+  icon: "💬"
+  description: "Effective expression and active listening"
+  color: "#14b8a6"
+
+environment:
+  name: "Environment"
+  code: "ENV"
+  icon: "🏡"
+  description: "Organizing and optimizing your physical space"
+  color: "#84cc16"
+
+spirituality:
+  name: "Spirituality"
+  code: "SPIRIT"
+  icon: "🕉️"
+  description: "Practices for meaning, purpose, and inner peace"
+  color: "#a855f7"

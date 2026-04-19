@@ -1,4 +1,174 @@
 ---
-layout: home
-# Index page
+layout: default
+title: Home
 ---
+
+{% assign published_habits = site.habits | where_exp: "h", "h.published == true and h.title.size > 0" %}
+
+<div class="hero-section">
+  <p class="site-tagline">A comprehensive catalog of habits and practices from books, podcasts, research, and expert advice</p>
+  
+  <div class="search-hero">
+    <input type="text" id="search-input" placeholder="Search habits..." class="search-input" />
+    <div id="search-results" class="search-results"></div>
+  </div>
+</div>
+
+<div class="quick-stats">
+  <div class="stat-card">
+    <span class="stat-number">{{ published_habits.size }}</span>
+    <span class="stat-label">Habits</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-number">{{ site.data.categories.size }}</span>
+    <span class="stat-label">Categories</span>
+  </div>
+  <div class="stat-card">
+    {% assign total_refs = 0 %}
+    {% for habit in published_habits %}
+      {% if habit.references %}
+        {% assign total_refs = total_refs | plus: habit.references.size %}
+      {% endif %}
+    {% endfor %}
+    <span class="stat-number">{{ total_refs }}</span>
+    <span class="stat-label">Sources</span>
+  </div>
+</div>
+
+<section class="featured-habits">
+  <h2>Recently Added</h2>
+  <div class="habits-grid">
+    {% assign recent_habits = published_habits | sort: "date_added" | reverse | limit: 4 %}
+    {% for habit in recent_habits %}
+      {% include habit-card.html habit=habit %}
+    {% endfor %}
+  </div>
+  <div class="section-footer">
+    <a href="/habitopedia/browse/" class="btn-primary">Browse All Habits →</a>
+  </div>
+</section>
+
+<section class="categories-overview">
+  <h2>Browse by Category</h2>
+  <div class="category-grid-compact">
+    {% for category_item in site.data.categories limit:8 %}
+      {% assign category_key = category_item[0] %}
+      {% assign category = category_item[1] %}
+      {% assign category_habits = published_habits | where: "primary_category", category_key %}
+      
+      <a href="/habitopedia/categories/#{{ category_key }}" class="category-tile" style="border-color: {{ category.color }}">
+        <span class="category-icon-large">{{ category.icon }}</span>
+        <h3>{{ category.name }}</h3>
+        <span class="category-count">{{ category_habits.size }} habits</span>
+      </a>
+    {% endfor %}
+  </div>
+  <div class="section-footer">
+    <a href="/habitopedia/categories/" class="btn-primary">View All Categories →</a>
+  </div>
+</section>
+
+<section class="explore-section">
+  <h2>Explore</h2>
+  <div class="explore-grid">
+    <a href="/habitopedia/stats/" class="explore-card">
+      <span class="explore-icon">📊</span>
+      <h3>Statistics</h3>
+      <p>See trends, top sources, and catalog insights</p>
+    </a>
+    <a href="/habitopedia/browse/" class="explore-card">
+      <span class="explore-icon">🔍</span>
+      <h3>Advanced Search</h3>
+      <p>Filter by category, ring, time investment, and source type</p>
+    </a>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Search script initialized');
+  
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  
+  if (!searchInput || !searchResults) {
+    console.error('Search elements not found!');
+    return;
+  }
+  
+  console.log('Search elements found:', searchInput, searchResults);
+  let habitsData = [];
+
+  // Load search data
+  fetch('{{ "/search.json" | relative_url }}')
+    .then(response => {
+      console.log('Fetch response:', response.status);
+      if (!response.ok) throw new Error('Failed to load search data');
+      return response.json();
+    })
+    .then(data => {
+      habitsData = data;
+      console.log('✓ Loaded', habitsData.length, 'habits for search');
+    })
+    .catch(error => {
+      console.error('❌ Search data loading error:', error);
+    });
+
+  // Simple search function
+  function search(query) {
+    console.log('Search called with:', query);
+    
+    if (query.length < 2) {
+      searchResults.innerHTML = '';
+      searchResults.style.display = 'none';
+      return;
+    }
+
+    if (habitsData.length === 0) {
+      console.log('Habits data not loaded yet');
+      searchResults.innerHTML = '<div class="search-result-item">Loading search data...</div>';
+      searchResults.style.display = 'block';
+      return;
+    }
+
+    const lowerQuery = query.toLowerCase();
+    const results = habitsData.filter(habit => {
+      return habit.title.toLowerCase().includes(lowerQuery) ||
+             habit.description.toLowerCase().includes(lowerQuery) ||
+             (habit.tags && habit.tags.some(tag => tag.toLowerCase().includes(lowerQuery))) ||
+             habit.content.toLowerCase().includes(lowerQuery);
+    }).slice(0, 8);
+
+    console.log('Found', results.length, 'results');
+
+    if (results.length === 0) {
+      searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
+      searchResults.style.display = 'block';
+      return;
+    }
+
+    searchResults.innerHTML = results.map(habit => `
+      <a href="/habitopedia${habit.url}" class="search-result-item">
+        <div class="search-result-title">${habit.title}</div>
+        <div class="search-result-description">${habit.description}</div>
+      </a>
+    `).join('');
+    searchResults.style.display = 'block';
+    console.log('Search results displayed');
+  }
+
+  searchInput.addEventListener('input', (e) => {
+    console.log('Search input:', e.target.value);
+    search(e.target.value);
+  });
+
+  // Close search results when clicking outside
+  document.addEventListener('click', (e) => {
+    const clickedInsideSearch = searchInput.contains(e.target) || searchResults.contains(e.target);
+    if (!clickedInsideSearch && searchResults.style.display === 'block') {
+      console.log('Closing search results');
+      searchResults.style.display = 'none';
+    }
+  });
+});
+</script>

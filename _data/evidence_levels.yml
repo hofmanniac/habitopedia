@@ -1,0 +1,30 @@
+# Evidence Levels
+# Credibility and scientific backing of habit recommendations
+
+anecdotal:
+  name: "Anecdotal"
+  icon: "💭"
+  description: "Based on personal experience or individual stories"
+  color: "#94a3b8"
+  level: 1
+
+expert-opinion:
+  name: "Expert Opinion"
+  icon: "👤"
+  description: "Recommended by recognized experts or practitioners"
+  color: "#60a5fa"
+  level: 2
+
+research-backed:
+  name: "Research-Backed"
+  icon: "📊"
+  description: "Supported by scientific studies or data"
+  color: "#34d399"
+  level: 3
+
+meta-analysis:
+  name: "Meta-Analysis"
+  icon: "🏆"
+  description: "Confirmed by systematic review of multiple studies"
+  color: "#fbbf24"
+  level: 4
