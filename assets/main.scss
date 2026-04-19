@@ -3,6 +3,19 @@
 
 @import "minima";
 
+/* Box sizing fix */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
 /* Theme Variables */
 :root {
   --bg-primary: #ffffff;
@@ -111,6 +124,26 @@ a:hover {
 .site-nav .page-link:hover {
   color: var(--accent-color) !important;
   text-decoration: none;
+}
+
+.site-nav {
+  z-index: 1000;
+}
+
+.site-nav .trigger {
+  z-index: 1000;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px var(--shadow-medium);
+}
+
+.menu-icon svg path {
+  fill: var(--text-primary);
+}
+
+.site-header {
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .wrapper {
@@ -1291,6 +1324,44 @@ section h2:after {
   
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .wrapper {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .hero-section {
+    margin-left: calc(-1.5rem - 50vw + 50%);
+    margin-right: calc(-1.5rem - 50vw + 50%);
+    margin-top: 0;
+    margin-bottom: 2rem;
+    padding: 2rem 1rem;
+    border-radius: 0;
+  }
+
+  .hero-section .site-title {
+    font-size: 1.75rem;
+  }
+
+  .site-tagline {
+    font-size: 0.9rem;
+    padding: 0 1rem;
+  }
+
+  .search-hero {
+    max-width: none;
+    width: 100%;
+    padding: 0 1rem;
+    margin: 0;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 40px;
+    box-sizing: border-box;
   }
 
   .category-list-item,
